@@ -2,6 +2,8 @@
 layout: default
 ---
 
+This is a website about my project for Info 664.
+
 Text can be **bold**, _italic_, or ~~strikethrough~~.
 
 [Link to another page](./another-page.html).
