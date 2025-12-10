@@ -1,5 +1,5 @@
-title: Cayman theme
-description: Cayman is a clean, responsive theme for GitHub Pages.
-show_downloads: true
+title: Using the NASA Image and Video Library API
+description: Creating visualizations using keywords and other metadata from the NASA Image and Video Library API.
+show_downloads: false
 google_analytics:
 theme: jekyll-theme-cayman
