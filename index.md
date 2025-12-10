@@ -2,124 +2,135 @@
 layout: default
 ---
 
-This is a website about my project for Info 664.
+# Overview
 
-Text can be **bold**, _italic_, or ~~strikethrough~~.
+### Goals
+My aim with this project was to use the NASA Image and Video Library to create visualizations to demonstrate the way language has been associated with images and videos over time. I wanted this project to encourage viewers to think about metadata and how we describe images.
 
-[Link to another page](./another-page.html).
+### Process
+1. I began with creating a data frame of the subjects I was interested in working with (keywords, titles, etc.).
+2. I attempted to paginate through about 18 pages of search results- I later realized this did not work.
+3. I created a few graphs and visualizations with the data from one page of search results (100 results total).
 
-There should be whitespace between paragraphs.
+### Challenges
+- Problems with pagination that I noticed too late.
+- Unable to use matplotlib in the way I wanted, although I was able to figure it out somewhat, the graphs I was able to make with this data did not make very much sense.
 
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
+## Making a Data Frame
+```
+import requests
 
-# Header 1
+key = {key}
+query = 'climate change'
+url = f'https://images-api.nasa.gov/search?q={query}'
 
-This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
+r = requests.get(url)
 
-## Header 2
+r
+parsed = r.json()
+parsed.keys()
+articles = parsed['collection']
+items = articles['items']
+items[0]['data']
 
-> This is a blockquote following a header.
->
-> When something is important enough, you do it even if the odds are not in your favor.
+titles = []
+datesCreated = []
+keywords = []
+mediaTypes = []
+descriptions = []
+nasaIds = []
+links = []
 
-### Header 3
+for i in items:
+    title = (i['data'][0]['title'])
+    titles.append(title)
 
-```js
-// Javascript code with syntax highlighting.
-var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l)
-  return true;
-}
+for i in items:
+    dateCreated = (i['data'][0]['date_created'])
+    datesCreated.append(dateCreated)
+
+for i in items:
+    mediaType = (i['data'][0]['media_type'])
+    mediaTypes.append(mediaType)
+
+for i in items:
+    description = (i['data'][0]['description'])
+    descriptions.append(description)
+
+for i in items:
+    nasaId = (i['data'][0]['nasa_id'])
+    nasaIds.append(nasaId)
+
+for i in items:
+    try:
+        keyword = i['data'][0]['keywords']
+        keywords.append(keyword)
+    except:
+        keyword = 'n/a'
+        keywords.append(keyword)
+
+for i in items:
+    try:
+        link = i['links']
+        links.append(link)
+    except:
+        link = 'n/a'
+        links.append(link)
+
+print(len(titles), len(datesCreated), len(keywords), len(mediaTypes), len(descriptions), len(nasaIds), len(links))
+
+import pandas as pd
+
+df = pd.DataFrame({
+    'title': titles,
+    'date_created': datesCreated,
+    'keywords': keywords,
+    'media_type': mediaTypes,
+    'description': descriptions,
+    'nasa_id': nasaIds,
+    'links': links
+})
 ```
 
-```ruby
-# Ruby code with syntax highlighting
-GitHubPages::Dependencies.gems.each do |gem, version|
-  s.add_dependency(gem, "= #{version}")
-end
-```
+## Word Cloud
 
-#### Header 4
-
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-
-##### Header 5
-
-1.  This is an ordered list following a header.
-2.  This is an ordered list following a header.
-3.  This is an ordered list following a header.
-
-###### Header 6
-
-| head1        | head two          | three |
-|:-------------|:------------------|:------|
-| ok           | good swedish fish | nice  |
-| out of stock | good and plenty   | nice  |
-| ok           | good `oreos`      | hmm   |
-| ok           | good `zoute` drop | yumm  |
-
-### There's a horizontal rule below this.
-
-* * *
-
-### Here is an unordered list:
-
-*   Item foo
-*   Item bar
-*   Item baz
-*   Item zip
-
-### And an ordered list:
-
-1.  Item one
-1.  Item two
-1.  Item three
-1.  Item four
-
-### And a nested list:
-
-- level 1 item
-  - level 2 item
-  - level 2 item
-    - level 3 item
-    - level 3 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-
-### Small image
-
-![Octocat](https://github.githubassets.com/images/icons/emoji/octocat.png)
-
-### Large image
-
-![Branching](https://guides.github.com/activities/hello-world/branching.png)
-
-
-### Definition lists can be used with HTML syntax.
-
-<dl>
-<dt>Name</dt>
-<dd>Godzilla</dd>
-<dt>Born</dt>
-<dd>1952</dd>
-<dt>Birthplace</dt>
-<dd>Japan</dd>
-<dt>Color</dt>
-<dd>Green</dd>
-</dl>
+![WordCloud](https://github.com/ibobadil/nasa-image-descriptions/blob/main/nasa_wordcloud3.png)
 
 ```
-Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-```
+import matplotlib.pyplot as plt
+from wordcloud import WordCloud
 
+text = keyword_text_plot
+
+wordcloud = WordCloud(width=2500, height=2000, background_color='white', min_font_size=15).generate(text)
+
+plt.figure(figsize=(15,10))
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis("off")
+plt.show()
+
+wordcloud.to_file('nasa_wordcloud_square3.png')
+
+from PIL import Image
+import numpy as np
+image = Image.open("circle.jpg")  # Load the image from a file
+image
+
+circle_mask = np.array(image)
+
+import matplotlib.pyplot as plt
+from wordcloud import WordCloud
+
+text = keyword_text_plot
+
+wordcloud = WordCloud(mask=circle_mask, width=2000, height=2000, background_color='white', min_font_size=2).generate(text)
+
+plt.figure(figsize=(10,10))
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis("off")
+plt.show()
+
+wordcloud.to_file('nasa_wordcloud3.png')
 ```
-The final element.
-```
+### This is a work in progress!
+### Thank you!
