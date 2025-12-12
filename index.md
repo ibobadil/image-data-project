@@ -5,7 +5,7 @@ layout: default
 # Overview
 
 ### Goals
-My aim with this project was to use the NASA Image and Video Library to create visualizations that demonstrate the way language is associated with images. I wanted this project to encourage viewers to think about metadata and how we describe images through keywords, titles, and decriptions. I also wanted to depict the words that appears frequently in the metadata of these images. Although these visualizations were created using a relatively small dataset, I hope that there is a depiction of the range of words that are related to different pieces of information about an image or video.
+My aim with this project was to use the NASA Image and Video Library to create visualizations that demonstrate the way language is associated with images. I wanted this project to encourage viewers to think about metadata and how we describe images through keywords, titles, and decriptions. I also wanted to depict the words that appears frequently in the metadata of these images. Although these visualizations were created using a relatively small dataset, I hope that they demonstrate the range of words that are related to different pieces of information about an image or video.
 
 ### Process
 1. I began with creating a data frame of the subjects I was interested in working with (keywords, titles, etc.).
