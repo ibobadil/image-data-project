@@ -10,11 +10,18 @@ My aim with this project was to use the NASA Image and Video Library to create v
 ### Process
 1. I began with creating a data frame of the subjects I was interested in working with (keywords, titles, etc.).
 2. I attempted to paginate through about 18 pages of search results- I later realized this did not work.
-3. I created a few graphs and visualizations with the data from one page of search results (100 results total).
+3. I used **OpenRefine** to organize the data and remove unecessary punctuation and text. I returned to OpenRefine frequently throughout this process to create various graphs.
+4. I created a few graphs and visualizations with the data from one page of search results (100 results total). I began by trying to make various bar charts, byt these did not work well with my data frame or in demonstrating how words were related to each other.
+5. I learned how to make word clouds, which guided my the visualizations I chose to make moving forward.
+6. I attempted to create a text network graph with **networkx**, it was successful but very messy, so I returned to working with the data.
+7. I created a new data frame that separated all of the keywords.
+8. I used this to create multiple text networks that displayed relationships between keywords, titles, and NASA IDs.
 
 ### Challenges
-- Problems with pagination that I noticed too late.
-- Unable to use matplotlib in the way I wanted, although I was able to figure it out somewhat, the graphs I was able to make with this data did not make very much sense.
+- Unable to paginate through the results.
+- Because I could not get thorough data on the dates created for each image/video, it did not seem like I could create graphs that demonstrated anything accurate about the quantity of images/videos posted over time.
+- It took a while to figure out what graphs I could create interesting visualizations with using this data.
+- Had issues achieving some of the things I had hoped to do (connecting keywords or IDs to links to the photos, creating a hover feature over the text network graphs so that the text would be less cluttered, creating bar graphs that depicted the data in an interesting way)
 
 ## Making a Data Frame
 ```
@@ -91,46 +98,43 @@ df = pd.DataFrame({
     'links': links
 })
 ```
+## Bar Graphs
+I created a few simple bar graphs that depict the counts of some of the data.
 
-## Word Cloud
+![Bar chart of the frequency of creation dates](images/dates_chart.png) ![Bar chart of the media types](images/media_type_chart.png)
 
-![WordCloud](https://github.com/ibobadil/nasa-image-descriptions/blob/main/nasa_wordcloud3.png)
+![Bar chart of the most frequent titles](images/titles_chart.png) ![Bar chart of the most frequently appearing keywords](images/keywords_chart.png)
 
-```
-import matplotlib.pyplot as plt
-from wordcloud import WordCloud
+## Word Clouds
+I learned how to create word clouds. This was a fun step in this process. It helped me better understand the data I was working with and some more direction on what I could create with it.
 
-text = keyword_text_plot
+### Word cloud based on keywords
+![Text from keywords](images/nasa_wordcloud3.png)
 
-wordcloud = WordCloud(width=2500, height=2000, background_color='white', min_font_size=15).generate(text)
+### Word cloud based on titles
+![Text from titles](images/titles_wordcloud.png)
 
-plt.figure(figsize=(15,10))
-plt.imshow(wordcloud, interpolation='bilinear')
-plt.axis("off")
-plt.show()
+### Word cloud based on descriptions
+![Text from descriptions](images/description_wordcloud.png)
 
-wordcloud.to_file('nasa_wordcloud_square3.png')
 
-from PIL import Image
-import numpy as np
-image = Image.open("circle.jpg")  # Load the image from a file
-image
+## Text Networks
+I ultimately decided to create text networks visualizations as a way to depict the connections between the many keywords in this data frame. This was another fun step that took some trial and error, and that gave me some practice with different libraries in python including...
 
-circle_mask = np.array(image)
+### Text network connecting keywords and NASA IDs (displaying keywords)
 
-import matplotlib.pyplot as plt
-from wordcloud import WordCloud
+![Text network displaying keywords](images/keywords_display.png)
 
-text = keyword_text_plot
+### Text network connecting keywords and titles
 
-wordcloud = WordCloud(mask=circle_mask, width=2000, height=2000, background_color='white', min_font_size=2).generate(text)
+![Text network displaying keywords and titles](images/keywords_titles_display.png)
 
-plt.figure(figsize=(10,10))
-plt.imshow(wordcloud, interpolation='bilinear')
-plt.axis("off")
-plt.show()
+---
 
-wordcloud.to_file('nasa_wordcloud3.png')
-```
-### This is a work in progress!
-### Thank you!
+## Further steps
+- Improving the text network visualizations.
+- Continue to work on adding links and hover features.
+- Create more detailed bar graphs to display the data.
+- Paginate through more pages to create more extensive data frames and create interesting graphs based on dates.
+
+## Thank you!
