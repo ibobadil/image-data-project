@@ -22,7 +22,7 @@ My aim with this project was to use the [NASA Image and Video Library](https://i
 - Because I could not get thorough data on the dates created for each image/video, it did not seem like I could create graphs that demonstrated anything accurate about the quantity of images/videos posted over time.
 - Had issues achieving some of the things I had hoped to do (connecting keywords or IDs to links to the photos, creating a hover feature over the text network graphs so that the text would be more readable or include more information).
 
-## Making a Data Frame
+## Creating the Data Frame
 ```
 import requests
 
@@ -134,7 +134,7 @@ I ultimately decided to create text networks visualizations as a way to depict t
 
 ---
 
-## Further steps
+## Further Steps
 - Improving the text network visualizations.
 - Continue to work on adding links and hover features.
 - Create more detailed bar graphs to display the data.
