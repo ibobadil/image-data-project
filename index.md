@@ -119,7 +119,7 @@ I learned how to create word clouds. This was a fun step in this process. It hel
 
 
 ## Text Networks
-I ultimately decided to create text networks visualizations as a way to depict the connections between the many keywords in this data frame. This was another fun step that took some trial and error, and that gave me some practice with different libraries in python including...
+I ultimately decided to create text networks visualizations as a way to depict the connections between the many keywords in this data frame. This was another fun step that took some trial and error, and that gave me some practice with libraries in python including **networkx** and **matplotlib**. I also experimented with some libraries that I didn't end up using, but am hoping to learn more about, such as **bokeh** and **seaborn**.
 
 ### Text network connecting keywords and NASA IDs (displaying keywords)
 
@@ -136,5 +136,6 @@ I ultimately decided to create text networks visualizations as a way to depict t
 - Continue to work on adding links and hover features.
 - Create more detailed bar graphs to display the data.
 - Paginate through more pages to create more extensive data frames and create interesting graphs based on dates.
+- Create visualizations from different queries and keywords.
 
 ## Thank you!
